@@ -6,6 +6,8 @@ org_name=
 
 source credentials.sh
 
+target_folder_name="emojis"
+
 echo "fetching emoji data"
 
 emoji_data=$(curl -s "https://$org_name.slack.com/api/emoji.adminList" \
@@ -27,4 +29,6 @@ echo "$emoji_data" | jq -c '.[]' | while read -r entry; do
   url=$(echo "$entry" | jq -r .url)
 
   echo "$name - $url";
+  destination_folder="$target_folder_name/$name"
+  curl --create-dirs -O --output-dir "$destination_folder" "$url"
 done
