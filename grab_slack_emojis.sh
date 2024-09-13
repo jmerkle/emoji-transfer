@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-auth_cookie_value=replace_this_with_value
-token_value=replace_this_with_value
-org_name=name-of-your-org
+auth_cookie_value=
+token_value=
+org_name=
+
+source credentials.sh
 
 echo "fetching emoji data"
 
