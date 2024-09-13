@@ -20,4 +20,11 @@ emoji_data=$(curl -s "https://$org_name.slack.com/api/emoji.adminList" \
   -F sort_dir=asc | \
   jq -r .emoji)
 
-  echo "found $(echo $emoji_data | jq 'length') emojis"
+echo "found $(echo "$emoji_data" | jq 'length') emojis"
+
+echo "$emoji_data" | jq -c '.[]' | while read -r entry; do
+  name=$(echo "$entry" | jq -r .name)
+  url=$(echo "$entry" | jq -r .url)
+
+  echo "$name - $url";
+done
