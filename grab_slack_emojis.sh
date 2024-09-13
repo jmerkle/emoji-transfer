@@ -7,6 +7,7 @@ org_name=
 source credentials.sh
 
 target_folder_name="emojis"
+max_emojis_fetched=5000
 
 echo "fetching emoji data"
 
@@ -17,7 +18,7 @@ emoji_data=$(curl -s "https://$org_name.slack.com/api/emoji.adminList" \
   -H "cookie: d=$auth_cookie_value" \
   -F token="$token_value" \
   -F page=1 \
-  -F count=5000 \
+  -F count=$max_emojis_fetched \
   -F sort_by=name \
   -F sort_dir=asc | \
   jq -r .emoji)
